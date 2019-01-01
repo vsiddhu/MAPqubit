@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
 #Aim: Implement Projected gradient descent over qubit density operators using 
 #     backtrack stepsize.
 #Author: Vikesh Siddhu
@@ -14,9 +9,6 @@
 import prGDQubitFun as prGDFun
 import numpy as np
 import time as time
-
-from scipy.optimize import minimize_scalar
-
 
 # In[2]:
 

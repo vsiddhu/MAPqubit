@@ -1,11 +1,6 @@
-#Aim: Simulate the X,Y,Z pauli measurement on a generalized amplitude and phase damped qubit 
-#     and perform reconstruction on simulated data using MAP and MLE estimators.
-
-# Details: Chooses 'nPoints' number of states uniformly on the bloch sphere 
-# Pass each state, through a generalized amplitude damping channel, and phase
-# damping channel simulate 'nMes' measurements in each of the X,Y,Z pauli measurements.
-# From the measurement data construct MAP and MLE estimates. 
-# Store various parameters.
+#Aim:   Simulate the X,Y,Z pauli measurement on a generalized amplitude and phase 
+#       damped qubit and perform reconstruction on simulated data using MAP and 
+#       MLE estimators.
 
 #Author: Vikesh Siddhu,
 #        Department of Physics,
@@ -15,8 +10,6 @@
 #Date: 6th Dec'18
 
 
-# In[29]:
-
 #Get numpy library
 import numpy as np
 np.seterr(all='raise')
@@ -24,43 +17,26 @@ np.seterr(all='raise')
 from multiprocessing import Process, Queue
 import multiprocessing as mp
 
-
-# In[30]:
-
 #Import code for doing projected gradient descent
 from prGD import doPrGDVec as solver
 #Import code that contains function and gradient
 import gadPdFun as inp
 
-
-# In[31]:
-
 import copy as cp
 import time as time
-
-
-# In[32]:
 
 #Import library for storing data 
 from astropy.table import Table
 
-
-# In[33]:
-
 #Import functions to compute surrogate duality gap
 from prGDQubitFun import dualGap
-
-
-# In[34]:
 
 #Import functions for generating measurement data
 import qbitM as qbitM                                                          
 import randomRho as randRho 
 
 
-# In[35]:
-
-#Function for finding a good starting point for
+#Helper function for finding a good starting point for
 #projected gradient optimization 
 def goodStartPt(nMes, dAt, pVal, gma, lmd):
     """
@@ -70,7 +46,6 @@ def goodStartPt(nMes, dAt, pVal, gma, lmd):
     data and parameters for the Generalized Amplitude Damping (GAD) and Phase
     Damping (PD) channels, returns a vector which represents the 
     unconstrained minimum of the logLGadPD
-    
     
     Arguments:
         nMes   :  The number of pauli measurements to be performed
@@ -96,8 +71,6 @@ def goodStartPt(nMes, dAt, pVal, gma, lmd):
     r0 = r0/np.array([lm,lm,lmZ])
     return r0
 
-
-# In[36]:
 
 #Function for constucting the MAP estimate under generalized
 #amplitude and phase damping noise
@@ -158,9 +131,12 @@ def doMAPreconstruction(nMes, dAt, pVal, gma, lmd):
     #If not solved to high accuracy
     
     dGap = dualGap(grad, xStar)
+    
+    ###########################################################################
+    #Developer Use only:
+    ###########################################################################
     if dGap > 1e-6 and pGd > 1e-6:
         flag = 1
-        #Developer Use only:
         #This part of code is for diagnosing problems with the convergence
         #of projected gradient descent
         #print 'Norm of reconstructed vector = ', np.linalg.norm(xStar)
@@ -172,10 +148,9 @@ def doMAPreconstruction(nMes, dAt, pVal, gma, lmd):
         #print 'pVal = ', pVal
         #print 'gamma = ', gma
         #print 'lmd = ', lmd
+    ###########################################################################
     return (xStar, flag)
 
-
-# In[37]:
 
 #Function for taking a Bloch vector and returning its noisy version
 def genNoisyVec(vecActual, pVal, gma, lmd):
@@ -204,8 +179,6 @@ def genNoisyVec(vecActual, pVal, gma, lmd):
     z = gma*(2.*pVal-1.) + z*(1. - gma)
     return np.array([x,y,z])
 
-
-# In[38]:
 
 #Generate a random qubit state, generate measurement data on
 #its noisy version, do MAP and MLE.
@@ -263,8 +236,6 @@ def stateReconst(nMes, pVal, gma, lmd):
 
     return (vecActual, rMAP, rMLE, dAt)
 
-
-# In[39]:
 
 def performExp(nMin, nMax, nTotal, pVal, gma, lmd, nPoints, fileName):
     """

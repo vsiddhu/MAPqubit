@@ -1,12 +1,5 @@
-
-# coding: utf-8
-
-# In[50]:
-
 import numpy as np
 
-
-# In[51]:
 
 def randomSphereUniformRadius():
     """
@@ -62,8 +55,6 @@ def randomUnitBallPoint():
     z = r*np.cos( theta )
     return (x,y,z)
 
-
-# In[52]:
 
 def randomSpherePoint(r):
     """

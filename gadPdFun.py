@@ -1,13 +1,6 @@
-
-# coding: utf-8
-
-# In[9]:
-
 import numpy as np
 import copy as cp
 
-
-# In[10]:
 
 def logLGadPD(vec, nMeasure, data, p, gma, lmd):
     """
@@ -50,8 +43,6 @@ def logLGadPD(vec, nMeasure, data, p, gma, lmd):
     val = data*np.log(pVec) + (nMeasure - data)*np.log(1.-pVec)
     return -np.sum(val)
 
-
-# In[11]:
 
 def gradlogLGadPD(vec, nMeasure, data, p, gma, lmd):
     """
@@ -101,8 +92,9 @@ def gradlogLGadPD(vec, nMeasure, data, p, gma, lmd):
     val[2] = val[2]*(1. - gma)/2.
     return -val
 
-
-# In[12]:
+###############################################################################
+#Developer Use only:
+###############################################################################
 
 ## In[20]:
 #
@@ -122,4 +114,6 @@ def gradlogLGadPD(vec, nMeasure, data, p, gma, lmd):
 #    gma = .1
 #    lmd = .21
 #    print check_grad(logLGadPD, gradlogLGadPD, vecActual, nMeasure, data, p, gma, lmd)
+
+###############################################################################
 
