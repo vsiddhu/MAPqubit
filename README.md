@@ -39,6 +39,29 @@ example that shows how minimization of a convex function over qubit density
 operators can be done using projected gradient descent. In this code one
 also computes the surrogate duality gap.
 
+## Contributors
+If you end up using this code, please cite the following paper - 
+
+Vikesh Siddhu, Maximum a posteriori probability estimates for quantum tomography, Phys. Rev. A 99, 012342 (2019) 
+
+```
+@article{PhysRevA.99.012342,
+  title = {Maximum a posteriori probability estimates for quantum tomography},
+  author = {Siddhu, Vikesh},
+  journal = {Phys. Rev. A},
+  volume = {99},
+  issue = {1},
+  pages = {012342},
+  numpages = {7},
+  year = {2019},
+  month = {Jan},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevA.99.012342},
+  url = {https://link.aps.org/doi/10.1103/PhysRevA.99.012342}
+}
+```
+
+Report bugs and missing info to vsiddhuATandrewDOTcmuDOTedu (replace AT, DOT appropriately).
 
 ## License
 
